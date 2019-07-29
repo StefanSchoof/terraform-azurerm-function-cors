@@ -47,7 +47,7 @@ resource "azurerm_function_app" "test" {
 }
 
 module "function-cors" {
-  source              = "github.com/StefanSchoof/terraform-azurerm-function-cors"
+  source              = "StefanSchoof/function-cors/azurerm"
   resource_group_name = azurerm_resource_group.test.name
   allowed_origins     = list("https://example.com", "https://sub.example.com")
   function_app_name   = azurerm_function_app.test.name
