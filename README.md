@@ -11,14 +11,14 @@ A module to add allowed cors origins. This is a workaround until <https://github
 ## Example
 
 ```terraform
-resource "azurerm_resource_group" "testrg" {
+resource "azurerm_resource_group" "test" {
   name     = "resourceGroupName"
   location = "westus"
 }
 
-resource "azurerm_storage_account" "testsa" {
+resource "azurerm_storage_account" "test" {
   name                = "storageaccountname"
-  resource_group_name = azurerm_resource_group.testrg.name
+  resource_group_name = azurerm_resource_group.test.name
   location            = "westus"
 
   account_tier             = "Standard"
@@ -47,9 +47,9 @@ resource "azurerm_function_app" "test" {
 }
 
 module "function-cors" {
-  source              = "./terraform-azurerm-function-cors"
-  resource_group_name = azurerm_resource_group.testrg.name
-  allowed_origins     = list("https://example.com")
+  source              = "github.com/StefanSchoof/terraform-azurerm-function-cors"
+  resource_group_name = azurerm_resource_group.test.name
+  allowed_origins     = list("https://example.com", "https://sub.example.com")
   function_app_name   = azurerm_function_app.test.name
 }
 ```
